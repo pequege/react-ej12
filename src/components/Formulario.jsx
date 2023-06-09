@@ -9,9 +9,10 @@ const Formulario = () => {
   const consultarAPI = async () => {
     try {
       setMostrarSpinner(true)
-      const respuesta = await fetch("https://newsdata.io/api/1/news?" + 
-      "apiKey=pub_24220ba670749c9424e985965526f426225a6" + 
-      "&language=es"+ `&category=${categoria || 'science'}`); //GET querie
+      const respuesta = await fetch("https://newsdata.io/api/1/news?"
+      + "apiKey=pub_24220ba670749c9424e985965526f426225a6" 
+      + `&category=${categoria || 'science'}`
+      + `&country=${pais || 'science'}`); //GET querie
       const dato = await respuesta.json();
       console.log(dato);
       setNoticias(dato.results);
@@ -23,6 +24,7 @@ const Formulario = () => {
   
   const [noticias, setNoticias] = useState([]);
   const [categoria, setCategoria] = useState("");
+  const [pais, setPais] = useState("");
   
   const componenteRenderizado = (mostrarSpinner)? (
     <div className="col-12 align-items-center">
@@ -33,7 +35,7 @@ const Formulario = () => {
 
     useEffect(() => {
       consultarAPI();
-    }, [categoria]);
+    }, [categoria, pais]);
   
   return (
     <>
@@ -56,11 +58,12 @@ const Formulario = () => {
       </Form.Select>
       <Form.Label>Buscar por país</Form.Label>
       <Form.Select aria-label="Buscar por país"
+        onChange={(e) =>setPais(e.target.value)}
         className="mb-2">
-        <option value="arg">Argentina</option>
-        <option value="arg">Rusia</option>
-        <option value="arg"></option>
-        <option value="arg"></option>
+        <option value="ar">Argentina</option>
+        <option value="ru">Rusia</option>
+        <option value="us">Estados Unidos</option>
+        <option value="jp">Japón</option>
       </Form.Select>
       {componenteRenderizado}
     </>
