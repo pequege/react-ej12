@@ -54,6 +54,14 @@ const Formulario = () => {
         <option value="technology">Tecnología</option>
         <option value="tourism">Turismo</option>
       </Form.Select>
+      <Form.Label>Buscar por país</Form.Label>
+      <Form.Select aria-label="Buscar por país"
+        className="mb-2">
+        <option value="arg">Argentina</option>
+        <option value="arg">Rusia</option>
+        <option value="arg"></option>
+        <option value="arg"></option>
+      </Form.Select>
       {componenteRenderizado}
     </>
   );
